@@ -11,8 +11,6 @@ jobs:
         image: postgres:14.1
         env:
           POSTGRES_PASSWORD: postgres
-        ports:
-          - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -20,8 +18,6 @@ jobs:
           --health-retries 5
       httpbin:
         image: kennethreitz/httpbin
-        ports:
-          - '8777:80'
 
     steps:
       - name: Check out repository code
@@ -30,5 +26,5 @@ jobs:
       - name: Run Maven Tests
         env:
           DATABASE_URL: postgresql://postgres:5432/postgres?user=postgres&password=postgres
-          HTTPBIN_URL: http://httpbin:8777
+          HTTPBIN_URL: http://httpbin
         run: ./mvnw test
