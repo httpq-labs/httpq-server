@@ -16,7 +16,6 @@
  */
 package org.httpq.server;
 
-import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
@@ -40,7 +39,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class HttpApiFixtures {
   static TypedConf typedConf;
-  Faker faker = new Faker();
 
   public HttpApiFixtures(TypedConf typedConf) {
     HttpApiFixtures.typedConf = typedConf;
@@ -48,11 +46,8 @@ public class HttpApiFixtures {
 
   static String X_API_KEY = "X-Api-Key";
 
-  static String testEndpoint = "http://0.0.0.0:8777";
+  static String testEndpoint = System.getenv().getOrDefault("HTTPBIN_URL", "http://0.0.0.0:8777");
 
-  public String endpointUrl(String path) {
-    return testEndpoint+path;
-  }
   public RequestSpecification reqSpec(UUID apiKey) {
     return new RequestSpecBuilder()
       .addHeader(X_API_KEY, apiKey.toString())
@@ -232,11 +227,6 @@ public class HttpApiFixtures {
       tenant, consumer, topic, topicStr, subscription, version1, version1Str, version2, version2Str, rootSpec, masterSpec, userSpec);
   }
 
-  public UUID setupSubscription(RequestSpecification masterSpec, RequestSpecification userSpec, UUID consumer, String topicString, String path) {
-    UUID topic = createTopic(masterSpec, topicString, 201);
-    return createSubscription(userSpec, topic, consumer, testEndpoint + path, 201);
-
-  }
 
   // helpers for good measure
   Connection conn() {

@@ -18,6 +18,10 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+      httpbin:
+        image: kennethreitz/httpbin
+        ports:
+          - '8777:80'
 
     steps:
       - name: Check out repository code
@@ -26,4 +30,5 @@ jobs:
       - name: Run Maven Tests
         env:
           DATABASE_URL: postgresql://postgres:5432/postgres?user=postgres&password=postgres
+          HTTPBIN_URL: http://httpbin:8777
         run: ./mvnw test
