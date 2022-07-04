@@ -25,5 +25,5 @@ jobs:
 
       - name: Run Maven Tests
         env:
-          DATABASE_URL: postgresql://postgres:5432/postgres_test?user=postgres&password=postgres
+          DATABASE_URL: postgresql://postgres:5432/postgres?user=postgres&password=postgres
         run: ./mvnw test
