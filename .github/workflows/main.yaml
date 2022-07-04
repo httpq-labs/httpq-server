@@ -10,7 +10,6 @@ jobs:
       postgres:
         image: postgres:14.1
         env:
-          POSTGRES_USER: postgres_test
           POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
@@ -26,5 +25,5 @@ jobs:
 
       - name: Run Maven Tests
         env:
-          DATABASE_URL: postgresql://postgres:5432/postgres_test?user=postgres&password=postgres&currentSchema=postgres
+          DATABASE_URL: postgresql://postgres:5432/postgres_test?user=postgres&password=postgres
         run: ./mvnw test
