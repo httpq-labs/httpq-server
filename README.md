@@ -4,7 +4,7 @@ HTTPQ is a multitenant, zero-ops, horizontally scalable webhooks sending server.
 
 It's open-source under a GPLv3 license and production grade.
 
-Its OpenAPI specification makes it easy to use and administer from any programming language
+Its [OpenAPI specification](https://httpq-labs.github.io/httpq-api-spec/) makes it easy to use and administer from any programming language
 
 
 ## Quick Links
