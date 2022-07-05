@@ -1,4 +1,4 @@
-# HTTPQ
+![logo](static/logo.png)
 
 HTTPQ is a multitenant, zero-ops, horizontally scalable webhooks sending server.
 
