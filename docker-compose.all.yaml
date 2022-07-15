@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  redoc:
+    image: redocly/redoc
+    ports:
+      - '8712:80'
+    environment:
+      - SPEC_URL=https://raw.githubusercontent.com/httpq-labs/httpq-api-spec/main/openapi.yml
+  httpq:
+    build: .
+    environment:
+      - DATABASE_URL=postgresql://db:5432/postgres?user=postgres&password=postgres
+      - HTTPBIN_URL=http://httpbin
+    ports:
+      - '8888:8888'
+    depends_on:
+      db:
+        condition: service_healthy
+  requestbin:
+    image: weshigbee/requestbin
+    ports:
+      - '8722:8000'

@@ -25,6 +25,8 @@ import org.httpq.model.NewWebhookEvent;
 import org.httpq.model.SecurityKey;
 import org.httpq.model.SecurityKeyScope;
 import org.httpq.repository.Repositories;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +36,7 @@ import java.util.UUID;
 public class WebhookEvents extends HttpHandler {
   private final EnqueuerManager enqueuerManager;
   private final PgPool pool;
-
+  private final static Logger LOGGER = LoggerFactory.getLogger(WebhookEvents.class);
   public WebhookEvents(PgPool pool, EnqueuerManager enqueuerManager) {
     this.enqueuerManager = enqueuerManager;
     this.pool = pool;
@@ -64,9 +66,9 @@ public class WebhookEvents extends HttpHandler {
   public void create(RoutingContext ctx) {
     SecurityKey securityKey = authorize(ctx);
     JsonObject body = ctx.getBodyAsJson();
-    UUID consumerId = UUID.fromString(body.getString("consumer"));
+    UUID consumerId = UUID.fromString(body.getString("consumerId"));
     String topicId = body.getString("topic");
-    JsonObject payload = body.getJsonObject("versioned_payloads");
+    JsonObject payload = body.getJsonObject("versionedPayloads");
     Map<String, JsonObject> payloads = new HashMap<>();
 
     for (String k : payload.fieldNames()) {

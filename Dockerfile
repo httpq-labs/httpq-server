@@ -22,7 +22,7 @@ COPY . /project/
 RUN ./mvnw package -DskipTests -B
 
 # 2nd Docker build stage: copy builder output and configure entry point
-FROM --platform=linux/amd64 eclipse-temurin:17
+FROM eclipse-temurin:17
 ENV APP_DIR /application
 ENV APP_FILE httpq-server-fat.jar
 

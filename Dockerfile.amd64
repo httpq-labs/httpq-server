@@ -15,24 +15,21 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-version: '3.8'
-services:
-  db:
-    image: postgres:14.1
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    healthcheck:
-      test: /usr/bin/pg_isready
-      interval: 5s
-      timeout: 10s
-      retries: 120
-    ports:
-      - '5432:5432'
-    volumes:
-      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
-  httpbin:
-    image: kennethreitz/httpbin
-    ports:
-      - '8777:80'
+# 1st Docker build stage: build the project with Maven
+FROM eclipse-temurin:17 as builder
+WORKDIR /project
+COPY . /project/
+RUN ./mvnw package -DskipTests -B
+
+# 2nd Docker build stage: copy builder output and configure entry point
+FROM --platform=linux/amd64 eclipse-temurin:17
+ENV APP_DIR /application
+ENV APP_FILE httpq-server-fat.jar
+
+EXPOSE 8888
+
+WORKDIR $APP_DIR
+COPY --from=builder /project/target/httpq-server-fat.jar $APP_DIR/$APP_FILE
+
+ENTRYPOINT ["sh", "-c"]
+CMD ["exec java -jar $APP_FILE"]

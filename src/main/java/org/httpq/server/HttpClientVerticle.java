@@ -19,6 +19,7 @@ package org.httpq.server;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.MessageConsumer;
 import io.vertx.core.http.HttpClosedException;
 import io.vertx.core.json.JsonObject;
@@ -69,7 +70,7 @@ public class HttpClientVerticle extends AbstractVerticle {
         .post(req.port(), req.host(), req.uri())
         .ssl(req.tls())
         .timeout(REQ_TIMEOUT.toMillis())
-        .send()
+        .sendBuffer(Buffer.buffer(req.body()))
         .map(resp -> switch (resp.statusCode()) {
           case 200 -> new WebhookHttpResponse(
             req.eventId(),

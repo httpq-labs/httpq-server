@@ -188,9 +188,9 @@ public class HttpApiFixtures {
                             int expectedRetCode) {
 
     JsonObject o = new JsonObject();
-    o.put("consumer", consumer);
+    o.put("consumerId", consumer);
     o.put("topic", topic);
-    o.put("versioned_payloads", versionedPayloads);
+    o.put("versionedPayloads", versionedPayloads);
 
 
     return createEntity(spec, "/events", o, expectedRetCode);
