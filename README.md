@@ -30,6 +30,7 @@ That's why we created **HTTPQ**. It's aimed to be an off-the-shelf solution that
 ## Quick Links
 
 - [Community](#community)
+- [Development](#development)
 - [Features](#features)
 - [Dependencies](#dependencies)
 - [Benchmark](#benchmark)
@@ -42,6 +43,8 @@ That's why we created **HTTPQ**. It's aimed to be an off-the-shelf solution that
 - [![Gitter](https://badges.gitter.im/httpq-labs/community.svg)](https://gitter.im/httpq-labs/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 - [Google Group](https://groups.google.com/u/3/g/httpq)
 
+### Development
+A public tracker is available in this github organization at <https://github.com/orgs/httpq-labs/projects/2>
 ### Features
 - Multitenancy
 - Authentication and Authorization
