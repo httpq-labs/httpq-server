@@ -3,7 +3,8 @@
 <img src="https://www.gnu.org/graphics/gplv3-with-text-136x68.png"/>
 </p> 
 
-[![Gitter](https://badges.gitter.im/httpq-labs/community.svg)](https://gitter.im/httpq-labs/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Gitter](https://badges.gitter.im/httpq-labs/community.svg)](https://gitter.im/httpq-labs/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) 
+
 
 **HTTPQ** is a multitenant, API driven, zero-ops, horizontally scalable webhooks sending server.
 
